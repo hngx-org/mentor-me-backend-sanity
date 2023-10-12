@@ -14,6 +14,7 @@ class AuthService {
             body: Joi.object({
                 email: Joi.string().trim().email().required().label("email"),
                 password: Joi.string().required().label("password"),
+                role: Joi.valid("mentee", "mentor").required().label("role"),
             }),
         })
             .options({ stripUnknown: true })
