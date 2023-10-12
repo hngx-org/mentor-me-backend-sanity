@@ -19,19 +19,15 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema<IUser>(
     {
         firstName: {
             type: String,
-            required: true,
         },
         middleName: {
             type: String,
-            required: false,
         },
         lastName: {
             type: String,
-            required: true,
         },
         username: {
             type: String,
-            required: true,
         },
         email: {
             type: String,
