@@ -65,6 +65,44 @@ class MentorService {
 
         return mentor;
     }
+
+    async updateMentorProfile({ body, $currentUser }: Partial<Request>) {
+        const { error, value: data } = Joi.object({
+            body: Joi.object({
+                yearsOfExp: Joi.number().label("Years of Experience"),
+                skills: Joi.string().trim().label("Skills"),
+                linkedin: Joi.string().trim().label("LinkedIn"),
+                other_links: Joi.string().trim().label("Other Links"),
+                certifications: Joi.string().trim().label("Certifications"),
+                certification_file: Joi.string().trim().label("Certification File"),
+                degree: Joi.string().trim().label("Degree"),
+                institution: Joi.string().trim().label("Institution"),
+                year_of_graduation: Joi.number().label("Year of Graduation"),
+                mentoring_experience: Joi.string().trim().label("Mentoring Experience"),
+                mentorship_type: Joi.string().trim().label("Mentorship Type"),
+                mentorship_availability: Joi.string().trim().label("Mentorship Availability"),
+                preferred_startTime: Joi.string().trim().label("Preferred Start Time"),
+                preferred_endTime: Joi.string().trim().label("Preferred End Time"),
+                preferred_days: Joi.string().trim().label("Preferred Days"),
+            }),
+            $currentUser: Joi.object({
+                _id: Joi.required(),
+            }),
+        })
+            .options({ stripUnknown: true })
+            .validate({ body, $currentUser });
+        if (error) throw new CustomError(error.message, 400);
+
+        // Check if user exists
+        const user = await UserModel.findOne({ _id: data.$currentUser._id });
+        if (!user) throw new CustomError("user not found", 404);
+
+        // Check if mentor exists
+        const mentor = await MentorModel.findOneAndUpdate({ userProfile: data.$currentUser._id }, { $set: { ...data.body, updatedAt: Date.now() } }, { new: true });
+        if (!mentor) throw new CustomError("mentor profile not found", 404);
+
+        return mentor;
+    }
 }
 
 export default new MentorService();

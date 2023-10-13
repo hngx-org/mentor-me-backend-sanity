@@ -18,6 +18,11 @@ class MentorController {
         const result = await MentorService.createMentorProfile({ ...req });
         res.status(200).send(response("Mentor profile created", result));
     }
+
+    async updateProfile(req: Request, res: Response) {
+        const result = await MentorService.updateMentorProfile({ ...req });
+        res.status(200).send(response("Mentor profile updated", result));
+    }
 }
 
 export default new MentorController();

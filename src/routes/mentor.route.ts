@@ -11,4 +11,6 @@ router.get("/get-current", authGuard(CONFIGS.ROLES.USER), MentorController.getCu
 
 router.post("/create-profile", authGuard(CONFIGS.ROLES.USER), MentorController.createProfile);
 
+router.patch("/update-profile", authGuard(CONFIGS.ROLES.USER), MentorController.updateProfile);
+
 export default router;
