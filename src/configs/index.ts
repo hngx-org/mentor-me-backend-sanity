@@ -18,7 +18,7 @@ const CONFIGS = {
     DEFAULT_DB_TOKEN_EXPIRY_DURATION: process.env.DEFAULT_DB_TOKEN_EXPIRY_DURATION ? ms(process.env.DEFAULT_DB_TOKEN_EXPIRY_DURATION) : ms("15m"),
 
     ROLES: {
-        USER: ["user", "admin"],
+        USER: ["mentee", "mentor"],
         ADMIN: ["admin"],
     },
 

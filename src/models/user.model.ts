@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { MenteeDetails, MentorDetails } from "@/utilities/constants";
 
 export interface IUser extends mongoose.Document {
     firstName: string;
@@ -13,6 +14,7 @@ export interface IUser extends mongoose.Document {
     lastActive: Date;
     createdAt?: Date;
     updatedAt?: Date;
+    userDetails?: MentorDetails | MenteeDetails;
 }
 
 const userSchema: mongoose.Schema<IUser> = new mongoose.Schema<IUser>(
@@ -57,6 +59,8 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema<IUser>(
             enum: ["mentee", "mentor"],
             default: "mentor",
         },
+
+        userDetails: { type: Object },
 
         lastActive: {
             type: Date,
