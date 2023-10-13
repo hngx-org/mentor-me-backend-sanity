@@ -1,7 +1,7 @@
 import Joi from "joi";
 import { Request } from "express";
 
-import MentorModel from "@/models/mentors.model";
+import MentorModel from "@/models/mentor.model";
 import UserModel from "@/models/user.model";
 import CustomError from "@/utilities/custom-error";
 
