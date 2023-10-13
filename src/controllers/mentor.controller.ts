@@ -9,6 +9,11 @@ class MentorController {
         res.status(200).send(response("Mentor profile retrieved", result));
     }
 
+    async getAllMentors(_req: Request, res: Response) {
+        const result = await MentorService.getAllMentors();
+        res.status(200).send(response("All mentors fetch", result));
+    }
+
     async createProfile(req: Request, res: Response) {
         const result = await MentorService.createMentorProfile({ ...req });
         res.status(200).send(response("Mentor profile created", result));

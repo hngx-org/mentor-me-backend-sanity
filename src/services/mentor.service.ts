@@ -5,7 +5,7 @@ import MentorModel from "@/models/mentors.model";
 import UserModel from "@/models/user.model";
 import CustomError from "@/utilities/custom-error";
 
-class UserService {
+class MentorService {
     async getCurrentMentor({ $currentUser }: Partial<Request>) {
         const { error, value: data } = Joi.object({
             $currentUser: Joi.object({
@@ -17,6 +17,10 @@ class UserService {
         if (error) throw new CustomError(error.message, 400);
 
         return await MentorModel.findOne({ userProfile: data.$currentUser._id });
+    }
+
+    async getAllMentors() {
+        return await MentorModel.find();
     }
 
     async createMentorProfile({ body, $currentUser }: Partial<Request>) {
@@ -63,4 +67,4 @@ class UserService {
     }
 }
 
-export default new UserService();
+export default new MentorService();
