@@ -41,9 +41,11 @@ class AuthService {
         await this.requestEmailVerification(user._id, true);
 
         // Remove password from response
-        delete user.password;
+        // Create a copy of the creator object without the password property
+        const userWithoutPassword = { ...user.toObject() };
+        delete userWithoutPassword.password;
 
-        return user;
+        return userWithoutPassword;
     }
 
     async login({ body }: Partial<Request>) {

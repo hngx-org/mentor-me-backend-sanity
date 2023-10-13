@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { IUser } from "./user.model";
 
 export interface IMentor extends mongoose.Document {
-    userDetails: mongoose.Types.ObjectId | IUser;
+    userProfile: mongoose.Types.ObjectId | IUser;
     yearsOfExp: number;
     skills: string;
     linkedin: string;
@@ -22,7 +22,7 @@ export interface IMentor extends mongoose.Document {
 
 const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
     {
-        userDetails: {
+        userProfile: {
             type: mongoose.Types.ObjectId,
             ref: "user",
             default: {},
