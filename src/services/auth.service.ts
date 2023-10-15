@@ -29,7 +29,7 @@ class AuthService {
         const context = {
             email: data.body.email,
             password: passwordHash,
-            role: data.body.email,
+            role: data.body.role,
         };
 
         // Create new user
