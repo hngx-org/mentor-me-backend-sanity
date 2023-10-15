@@ -1,10 +1,9 @@
 import mongoose from "mongoose";
 
 export interface IUser extends mongoose.Document {
-    firstName: string;
-    middleName: string;
-    lastName: string;
+    fullName: string;
     username: string;
+    image: string;
     email: string;
     password?: string;
     emailVerified: boolean;
@@ -18,13 +17,10 @@ export interface IUser extends mongoose.Document {
 
 const userSchema: mongoose.Schema<IUser> = new mongoose.Schema<IUser>(
     {
-        firstName: {
+        fullName: {
             type: String,
         },
-        middleName: {
-            type: String,
-        },
-        lastName: {
+        image: {
             type: String,
         },
         profileLink: {

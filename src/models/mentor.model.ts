@@ -6,6 +6,7 @@ export interface IMentor extends mongoose.Document {
     userProfile: mongoose.Types.ObjectId | IUser;
     yearsOfExp: number;
     // skills: string[];
+    expertise: string;
     skills: string;
     linkedin: string;
     other_links: string;
@@ -35,6 +36,7 @@ const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
             type: Number,
         },
         // skills: { type: [String] },
+        expertise: { type: String },
         skills: { type: String },
         linkedin: { type: String },
         other_links: { type: String },

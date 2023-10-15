@@ -2,15 +2,15 @@ import DefaultLayout from "@/email-templates/layouts/default-layout";
 import { Text, Heading, Section } from "@react-email/components";
 
 interface EmailProp {
-    firstName: string;
+    fullName: string;
     verificationCode: string;
 }
 
-export default function Email({ firstName, verificationCode }: EmailProp) {
+export default function Email({ fullName, verificationCode }: EmailProp) {
     return (
         <DefaultLayout>
             <Section style={{ padding: "16px 16px 0px 16px" }}>
-                <Heading as="h2">Hi {firstName}, ⚡️</Heading>
+                <Heading as="h2">Hi {fullName}, ⚡️</Heading>
 
                 <Text>We're really excited to have you on board.</Text>
 

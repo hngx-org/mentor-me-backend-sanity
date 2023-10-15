@@ -8,9 +8,9 @@ import VerificationLinkEmail from "@/email-templates/verification-link";
 import PasswordResetEmail from "@/email-templates/password-reset";
 
 class MailService {
-    async sendWelcomeUserEmail(context: { user: Pick<IUser, "_id" | "firstName" | "email">; verificationToken: string }) {
+    async sendWelcomeUserEmail(context: { user: Pick<IUser, "_id" | "fullName" | "email">; verificationToken: string }) {
         const emailProp = {
-            firstName: context.user.firstName,
+            fullName: context.user.fullName,
             verificationCode: context.verificationToken,
         };
 
@@ -22,9 +22,9 @@ class MailService {
         });
     }
 
-    async sendVerificationLinkEmail(context: { user: Pick<IUser, "_id" | "firstName" | "email">; verificationToken: string }) {
+    async sendVerificationLinkEmail(context: { user: Pick<IUser, "_id" | "fullName" | "email">; verificationToken: string }) {
         const emailProp = {
-            firstName: context.user.firstName,
+            fullName: context.user.fullName,
             verificationCode: context.verificationToken,
         };
 
@@ -36,9 +36,9 @@ class MailService {
         });
     }
 
-    async sendPasswordResetEmail(context: { user: Pick<IUser, "_id" | "firstName" | "email">; resetToken: string }) {
+    async sendPasswordResetEmail(context: { user: Pick<IUser, "_id" | "fullName" | "email">; resetToken: string }) {
         const emailProp = {
-            firstName: context.user.firstName,
+            fullName: context.user.fullName,
             resetLink: `${CONFIGS.URL.AUTH_BASE_URL}/reset-password?resetToken=${context.resetToken}&userId=${context.user._id}`,
         };
 
@@ -55,7 +55,7 @@ class MailService {
 // new MailService().sendWelcomeUserEmail({
 //     user: {
 //         _id: "5f9b3b1b9b3b1b9b3b1b9b3b",
-//         firstName: "John",
+//         fullName: "John",
 //         email: "", // Add your email here to test
 //     },
 //     verificationToken: "5f9b3b1b9b3b1b9b3b1b9b3b",

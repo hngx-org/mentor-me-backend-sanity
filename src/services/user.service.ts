@@ -23,7 +23,7 @@ class UserService {
     async updateProfile({ body, $currentUser }: Partial<Request>) {
         const { error, value: data } = Joi.object({
             body: Joi.object({
-                firstName: Joi.string().trim().required().label("first name"),
+                fullName: Joi.string().trim().required().label("first name"),
                 lastName: Joi.string().trim().required().label("last name"),
             }),
             $currentUser: Joi.object({
