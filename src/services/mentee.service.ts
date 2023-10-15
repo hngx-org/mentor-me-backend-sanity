@@ -16,7 +16,12 @@ class MenteeService {
             .validate({ $currentUser });
         if (error) throw new CustomError(error.message, 400);
 
-        return await MenteeModel.findOne({ userProfile: data.$currentUser._id });
+        const mentee = await MenteeModel.findOne({ userProfile: data.$currentUser._id });
+        // Check if user exists
+        const user = await UserModel.findOne({ _id: data.$currentUser._id });
+        if (!user) throw new CustomError("user not found", 404);
+
+        return { ...mentee, user };
     }
 
     async getAllMentee() {
@@ -54,7 +59,7 @@ class MenteeService {
         //   update user data with profile id
         await UserModel.updateOne({ _id: user._id }, { $set: { profileLink: mentee._id, updatedAt: Date.now() } });
 
-        return mentee;
+        return { ...mentee, user };
     }
 
     async updateMenteeProfile({ body, $currentUser }: Partial<Request>) {
@@ -83,7 +88,7 @@ class MenteeService {
         const mentee = await MenteeModel.findOneAndUpdate({ userProfile: data.$currentUser._id }, { $set: { ...data.body, updatedAt: Date.now() } }, { new: true });
         if (!mentee) throw new CustomError("mentee profile not found", 404);
 
-        return mentee;
+        return { ...mentee, user };
     }
 }
 
