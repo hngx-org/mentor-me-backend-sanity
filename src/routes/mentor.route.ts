@@ -13,4 +13,6 @@ router.post("/create-profile", authGuard(CONFIGS.ROLES.USER), MentorController.c
 
 router.patch("/update-profile", authGuard(CONFIGS.ROLES.USER), MentorController.updateProfile);
 
+router.post("/account-verification", authGuard(CONFIGS.ROLES.USER), MentorController.verifyProfile);
+
 export default router;

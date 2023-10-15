@@ -23,6 +23,11 @@ class MentorController {
         const result = await MentorService.updateMentorProfile({ ...req });
         res.status(200).send(response("Mentor profile updated", result));
     }
+
+    async verifyProfile(req: Request, res: Response) {
+        const result = await MentorService.verifyMentor({ ...req });
+        res.status(200).send(response("Details Received", result));
+    }
 }
 
 export default new MentorController();

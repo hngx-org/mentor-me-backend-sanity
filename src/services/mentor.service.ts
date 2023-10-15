@@ -103,6 +103,65 @@ class MentorService {
 
         return mentor;
     }
+
+    async verifyMentor({ body, $currentUser }: Partial<Request>) {
+        const { error, value: data } = Joi.object({
+            body: Joi.object({
+                certificates: Joi.object({
+                    certificationName: Joi.string().required().label("Certification Name"),
+                    issuingInstitution: Joi.string().required().label("Issuing Institution"),
+                    graduationYear: Joi.string().required().label("Graduation Year"),
+                    graduationFile: Joi.string().required().label("Graduation File"),
+                })
+                    .required()
+                    .label("Certificates"),
+
+                qualifications: Joi.object({
+                    qualification: Joi.string().required().label("Qualification"),
+                    yearsExperience: Joi.string().required().label("Years of Experience"),
+                    qualificationDesc: Joi.string().required().label("Qualification Description"),
+                })
+                    .required()
+                    .label("Qualifications"),
+
+                achievements: Joi.object({
+                    achievementName: Joi.string().required().label("Achievement Name"),
+                    issuingOrganization: Joi.string().required().label("Issuing Organization"),
+                    yearReceived: Joi.string().required().label("Year Received"),
+                    achievementDesc: Joi.string().required().label("Achievement Description"),
+                })
+                    .required()
+                    .label("Achievements"),
+
+                identification: Joi.object({
+                    fullName: Joi.string().required().label("Full Name"),
+                    dateOfBirth: Joi.string().required().label("Date of Birth"),
+                    idType: Joi.string().required().label("ID Type"),
+                    idNumber: Joi.string().required().label("ID Number"),
+                    uploadID: Joi.string().required().label("Upload ID"),
+                })
+                    .required()
+                    .label("Identification"),
+            }),
+
+            $currentUser: Joi.object({
+                _id: Joi.required(),
+            }),
+        })
+            .options({ stripUnknown: true })
+            .validate({ body, $currentUser });
+        if (error) throw new CustomError(error.message, 400);
+
+        // Check if user exists
+        const user = await UserModel.findOne({ _id: data.$currentUser._id });
+        if (!user) throw new CustomError("user not found", 404);
+
+        // Check if mentor exists
+        const mentor = await MentorModel.findOneAndUpdate({ userProfile: data.$currentUser._id }, { $set: { verificationData: { ...data.body }, isVerified: "Pending", updatedAt: Date.now() } }, { new: true });
+        if (!mentor) throw new CustomError("mentor profile not found", 404);
+
+        return mentor;
+    }
 }
 
 export default new MentorService();

@@ -25,7 +25,7 @@ export default function Email({ firstName, resetLink }: EmailProp) {
                         width: "180px",
                         height: "45px",
                         padding: "10px 20px",
-                        backgroundColor: "#04ce6e",
+                        backgroundColor: "#121212",
                         color: "#fff",
                         textDecoration: "none",
                         borderRadius: "10px",

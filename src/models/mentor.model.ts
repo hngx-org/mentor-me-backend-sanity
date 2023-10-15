@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { IUser } from "./user.model";
+import { MentorVerificationData } from "@/utilities/constants";
 
 export interface IMentor extends mongoose.Document {
     userProfile: mongoose.Types.ObjectId | IUser;
@@ -18,6 +19,8 @@ export interface IMentor extends mongoose.Document {
     preferred_startTime: string;
     preferred_endTime: string;
     preferred_days: string;
+    isVerified?: "Unverified" | "Pending" | "Rejected" | "Verified";
+    verificationData?: MentorVerificationData;
 }
 
 const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
@@ -44,6 +47,35 @@ const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
         preferred_startTime: { type: String },
         preferred_endTime: { type: String },
         preferred_days: { type: String },
+        isVerified: { type: String, enum: ["Unverified", "Pending", "Rejected", "Verified"], default: "mentor" },
+        verificationData: {
+            type: {
+                certificates: {
+                    certificationName: { type: String },
+                    issuingInstitution: { type: String },
+                    graduationYear: { type: String },
+                    graduationFile: { type: String },
+                },
+                qualifications: {
+                    qualification: { type: String },
+                    yearsExperience: { type: String },
+                    qualificationDesc: { type: String },
+                },
+                achievements: {
+                    achievementName: { type: String },
+                    issuingOrganization: { type: String },
+                    yearReceived: { type: String },
+                    achievementDesc: { type: String },
+                },
+                identification: {
+                    fullName: { type: String },
+                    dateOfBirth: { type: String },
+                    idType: { type: String },
+                    idNumber: { type: String },
+                    uploadID: { type: String },
+                },
+            },
+        },
     },
     {
         timestamps: true,
