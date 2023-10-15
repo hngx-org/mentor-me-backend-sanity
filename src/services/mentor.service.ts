@@ -27,7 +27,8 @@ class MentorService {
         const { error, value: data } = Joi.object({
             body: Joi.object({
                 yearsOfExp: Joi.number().required().label("Years of Experience"),
-                skills: Joi.array().items(Joi.string().trim()).label("Skills"),
+                // skills: Joi.array().items(Joi.string().trim()).label("Skills"),
+                skills: Joi.string().trim().required().label("skills"),
                 linkedin: Joi.string().trim().required().label("LinkedIn"),
                 other_links: Joi.string().trim().required().label("Other Links"),
                 certifications: Joi.string().trim().required().label("Certifications"),
