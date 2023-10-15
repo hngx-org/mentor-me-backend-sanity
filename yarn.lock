@@ -2967,9 +2967,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"mentorMe@workspace:.":
+"mentor-Me@workspace:.":
   version: 0.0.0-use.local
-  resolution: "mentorMe@workspace:."
+  resolution: "mentor-Me@workspace:."
   dependencies:
     "@react-email/components": ^0.0.7
     "@sentry/node": ^7.54.0
