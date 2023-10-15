@@ -87,7 +87,7 @@ class MentorService {
         const mentor = await new MentorModel({ userProfile: user, ...context }).save();
 
         const userContext = {
-            fullName: data.body.firstName,
+            fullName: data.body.fullName,
             bio: data.body.bio,
             image: data.body.image,
         };
@@ -101,26 +101,26 @@ class MentorService {
     async updateMentorProfile({ body, $currentUser }: Partial<Request>) {
         const { error, value: data } = Joi.object({
             body: Joi.object({
-                fullName: Joi.string().trim().required().label("Full Name"),
-                bio: Joi.string().trim().required().label("Bio"),
+                fullName: Joi.string().trim().label("Full Name"),
+                bio: Joi.string().trim().label("Bio"),
                 image: Joi.number().label("Image"),
-                yearsOfExp: Joi.number().required().label("Years of Experience"),
+                yearsOfExp: Joi.number().label("Years of Experience"),
                 // skills: Joi.array().items(Joi.string().trim()).label("Skills"),
-                skills: Joi.string().trim().required().label("skills"),
+                skills: Joi.string().trim().label("skills"),
                 expertise: Joi.string().trim().label("expertise"),
-                linkedin: Joi.string().trim().required().label("LinkedIn"),
-                other_links: Joi.string().trim().required().label("Other Links"),
-                certifications: Joi.string().trim().required().label("Certifications"),
-                certification_file: Joi.string().trim().required().label("Certification File"),
-                degree: Joi.string().trim().required().label("Degree"),
-                institution: Joi.string().trim().required().label("Institution"),
-                year_of_graduation: Joi.number().required().label("Year of Graduation"),
-                mentoring_experience: Joi.string().trim().required().label("Mentoring Experience"),
-                mentorship_type: Joi.string().trim().required().label("Mentorship Type"),
-                mentorship_availability: Joi.string().trim().required().label("Mentorship Availability"),
-                preferred_startTime: Joi.string().trim().required().label("Preferred Start Time"),
-                preferred_endTime: Joi.string().trim().required().label("Preferred End Time"),
-                preferred_days: Joi.string().trim().required().label("Preferred Days"),
+                linkedin: Joi.string().trim().label("LinkedIn"),
+                other_links: Joi.string().trim().label("Other Links"),
+                certifications: Joi.string().trim().label("Certifications"),
+                certification_file: Joi.string().trim().label("Certification File"),
+                degree: Joi.string().trim().label("Degree"),
+                institution: Joi.string().trim().label("Institution"),
+                year_of_graduation: Joi.number().label("Year of Graduation"),
+                mentoring_experience: Joi.string().trim().label("Mentoring Experience"),
+                mentorship_type: Joi.string().trim().label("Mentorship Type"),
+                mentorship_availability: Joi.string().trim().label("Mentorship Availability"),
+                preferred_startTime: Joi.string().trim().label("Preferred Start Time"),
+                preferred_endTime: Joi.string().trim().label("Preferred End Time"),
+                preferred_days: Joi.string().trim().label("Preferred Days"),
             }),
             $currentUser: Joi.object({
                 _id: Joi.required(),
@@ -154,7 +154,7 @@ class MentorService {
         };
 
         const userContext = {
-            fullName: data.body.firstName,
+            fullName: data.body.fullName,
             bio: data.body.bio,
             image: data.body.image,
         };

@@ -4,11 +4,15 @@ import { IUser } from "./user.model";
 export interface IMentee extends mongoose.Document {
     userProfile: mongoose.Types.ObjectId | IUser;
     expertise: string;
-    goal: string[];
     discipline_request: string;
     tools_request: string;
     skill_request: string;
     country_request: string;
+    goal: string;
+    country: string;
+    gender: string;
+    company: string;
+    title: string;
 }
 
 const menteeSchema: mongoose.Schema<IMentee> = new mongoose.Schema<IMentee>(
@@ -19,11 +23,15 @@ const menteeSchema: mongoose.Schema<IMentee> = new mongoose.Schema<IMentee>(
             default: {},
         },
         expertise: { type: String },
-        goal: { type: [String] },
+        goal: { type: String },
         discipline_request: { type: String },
         tools_request: { type: String },
         skill_request: { type: String },
         country_request: { type: String },
+        country: { type: String },
+        gender: { type: String },
+        company: { type: String },
+        title: { type: String },
     },
     {
         timestamps: true,

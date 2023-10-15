@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 export interface IUser extends mongoose.Document {
     fullName: string;
     username: string;
+    bio?: string;
     image: string;
     email: string;
     password?: string;
@@ -27,6 +28,9 @@ const userSchema: mongoose.Schema<IUser> = new mongoose.Schema<IUser>(
             type: String,
         },
         username: {
+            type: String,
+        },
+        bio: {
             type: String,
         },
         email: {
