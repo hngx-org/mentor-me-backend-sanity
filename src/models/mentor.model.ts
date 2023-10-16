@@ -8,6 +8,8 @@ export interface IMentor extends mongoose.Document {
     // skills: string[];
     expertise: string;
     skills: string;
+    title: string;
+    company: string;
     linkedin: string;
     other_links: string;
     certifications: string;
@@ -39,6 +41,8 @@ const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
         expertise: { type: String },
         skills: { type: String },
         linkedin: { type: String },
+        company: { type: String },
+        title: { type: String },
         other_links: { type: String },
         certifications: { type: String },
         certification_file: { type: String },

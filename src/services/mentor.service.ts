@@ -34,6 +34,8 @@ class MentorService {
                 yearsOfExp: Joi.number().required().label("Years of Experience"),
                 // skills: Joi.array().items(Joi.string().trim()).label("Skills"),
                 skills: Joi.string().trim().required().label("skills"),
+                company: Joi.string().trim().label("expertise"),
+                title: Joi.string().trim().label("expertise"),
                 expertise: Joi.string().trim().label("expertise"),
                 linkedin: Joi.string().trim().required().label("LinkedIn"),
                 other_links: Joi.string().trim().required().label("Other Links"),
@@ -81,6 +83,8 @@ class MentorService {
             preferred_endTime: data.body.preferred_endTime,
             preferred_days: data.body.preferred_days,
             expertise: data.body.expertise,
+            title: data.body.title,
+            company: data.body.company,
         };
 
         // Create new mentor profile
@@ -105,6 +109,8 @@ class MentorService {
                 bio: Joi.string().trim().label("Bio"),
                 image: Joi.number().label("Image"),
                 yearsOfExp: Joi.number().label("Years of Experience"),
+                company: Joi.string().trim().label("expertise"),
+                title: Joi.string().trim().label("expertise"),
                 // skills: Joi.array().items(Joi.string().trim()).label("Skills"),
                 skills: Joi.string().trim().label("skills"),
                 expertise: Joi.string().trim().label("expertise"),
@@ -151,6 +157,8 @@ class MentorService {
             preferred_endTime: data.body.preferred_endTime,
             preferred_days: data.body.preferred_days,
             expertise: data.body.expertise,
+            title: data.body.title,
+            company: data.body.company,
         };
 
         const userContext = {
