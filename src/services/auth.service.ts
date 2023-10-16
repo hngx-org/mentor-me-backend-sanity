@@ -54,6 +54,7 @@ class AuthService {
             body: Joi.object({
                 email: Joi.string().trim().email().required().label("email"),
                 password: Joi.string().required().label("password"),
+                role: Joi.string().required().label("Role"),
             }),
         })
             .options({ stripUnknown: true })
@@ -71,8 +72,10 @@ class AuthService {
         // check if account is disabled
         if (user.accountDisabled === true) throw new CustomError("account has been disabled, kindly contact support", 409);
 
-        // if account is not verified
+        // check if role is valid
+        if (data.body.role.toLowerCase() !== user.role.toLowerCase()) throw new CustomError(`This user is not a ${data.body.role}`, 400);
 
+        // if account is not verified
         if (!user.emailVerified) {
             // Send email verification
             await this.requestEmailVerification(user._id, false);
