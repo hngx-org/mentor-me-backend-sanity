@@ -62,13 +62,13 @@ class MenteeService {
         if (user.profileLink) throw new CustomError("user already have a profile", 400);
 
         const context = {
-            expertise: data.body.fullName,
+            expertise: data.body.expertise,
             goal: data.body.goal,
             discipline_request: data.body.discipline_request,
             tools_request: data.body.tools_request,
             skill_request: data.body.skill_request,
             country_request: data.body.country,
-            country: data.body.Country,
+            country: data.body.country,
             gender: data.body.gender,
             company: data.body.company,
             title: data.body.title,
@@ -122,7 +122,7 @@ class MenteeService {
             tools_request: data.body.tools_request,
             skill_request: data.body.skill_request,
             country_request: data.body.country,
-            country: data.body.Country,
+            country: data.body.country,
             gender: data.body.gender,
             company: data.body.company,
             title: data.body.title,
