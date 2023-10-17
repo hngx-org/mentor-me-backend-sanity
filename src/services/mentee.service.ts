@@ -97,8 +97,8 @@ class MenteeService {
                 goal: Joi.string().trim().label("Goal"),
                 discipline_request: Joi.string().trim().label("Discipline Request"),
                 tools_request: Joi.string().trim().label("Tools Request"),
-                skill_request: Joi.array().items(Joi.string().trim()).label("Skills"),
-                // skill_request: Joi.string().trim().label("Skill Request"),
+                // skill_request: Joi.array().items(Joi.string().trim()).label("Skills"),
+                skill_request: Joi.string().trim().label("Skill Request"),
                 country_request: Joi.string().trim().label("Country Request"),
                 country: Joi.string().trim().label("Country"),
                 bio: Joi.string().trim().label("Bio"),
@@ -116,7 +116,7 @@ class MenteeService {
         if (error) throw new CustomError(error.message, 400);
 
         const context = {
-            expertise: data.body.fullName,
+            expertise: data.body.expertise,
             goal: data.body.goal,
             discipline_request: data.body.discipline_request,
             tools_request: data.body.tools_request,
