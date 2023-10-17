@@ -5,9 +5,9 @@ import { MentorVerificationData } from "@/utilities/constants";
 export interface IMentor extends mongoose.Document {
     userProfile: mongoose.Types.ObjectId | IUser;
     yearsOfExp: number;
-    // skills: string[];
+    skills: string[];
     expertise: string;
-    skills: string;
+    // skills: string;
     title: string;
     company: string;
     linkedin: string;
@@ -37,9 +37,9 @@ const mentorSchema: mongoose.Schema<IMentor> = new mongoose.Schema<IMentor>(
         yearsOfExp: {
             type: Number,
         },
-        // skills: { type: [String] },
+        skills: { type: [String] },
         expertise: { type: String },
-        skills: { type: String },
+        // skills: { type: String },
         linkedin: { type: String },
         company: { type: String },
         title: { type: String },

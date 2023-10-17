@@ -6,7 +6,7 @@ export interface IMentee extends mongoose.Document {
     expertise: string;
     discipline_request: string;
     tools_request: string;
-    skill_request: string;
+    skill_request: string[];
     country_request: string;
     goal: string;
     country: string;
@@ -26,7 +26,7 @@ const menteeSchema: mongoose.Schema<IMentee> = new mongoose.Schema<IMentee>(
         goal: { type: String },
         discipline_request: { type: String },
         tools_request: { type: String },
-        skill_request: { type: String },
+        skill_request: { type: [String] },
         country_request: { type: String },
         country: { type: String },
         gender: { type: String },
