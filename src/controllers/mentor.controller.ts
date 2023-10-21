@@ -28,6 +28,11 @@ class MentorController {
         const result = await MentorService.verifyMentor({ ...req });
         res.status(200).send(response("Details Received", result));
     }
+
+    async getAMentor(req: Request, res: Response) {
+        const result = await MentorService.getMentor({ ...req });
+        res.status(200).send(response("Mentor data fetched", result));
+    }
 }
 
 export default new MentorController();

@@ -161,7 +161,7 @@ class MenteeService {
             .validate({ $currentUser, body });
         if (error) throw new CustomError(error.message, 400);
 
-        const loggedUser = await MenteeModel.findOne({ userProfile: data.$currentUser._id });
+        const loggedUser = await UserModel.findOne({ userProfile: data.$currentUser._id });
 
         // Check if user logged in exists
         if (!loggedUser) throw new CustomError("user not found, please login", 404);

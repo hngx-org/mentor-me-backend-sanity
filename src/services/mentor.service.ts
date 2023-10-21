@@ -4,6 +4,7 @@ import { Request } from "express";
 import MentorModel from "@/models/mentor.model";
 import UserModel from "@/models/user.model";
 import CustomError from "@/utilities/custom-error";
+import userModel from "@/models/user.model";
 
 class MentorService {
     async getCurrentMentor({ $currentUser }: Partial<Request>) {
@@ -234,6 +235,31 @@ class MentorService {
         if (!mentor) throw new CustomError("mentor profile not found", 404);
 
         return mentor;
+    }
+
+    async getMentor({ body, $currentUser }: Partial<Request>) {
+        const { error, value: data } = Joi.object({
+            body: Joi.object({
+                mentorId: Joi.string().trim().required().label("Mentee ID"),
+            }),
+            $currentUser: Joi.object({
+                _id: Joi.required(),
+            }),
+        })
+            .options({ stripUnknown: true })
+            .validate({ $currentUser, body });
+        if (error) throw new CustomError(error.message, 400);
+
+        const loggedUser = await userModel.findOne({ userProfile: data.$currentUser._id });
+
+        // Check if user logged in exists
+        if (!loggedUser) throw new CustomError("user not found, please login", 404);
+
+        const mentor = await MentorModel.findOne({ _id: data.body.mentorId });
+        if (!mentor) throw new CustomError("Mentor not found", 404);
+        const user = await UserModel.findOne({ _id: mentor?._id });
+
+        return { ...mentor, user };
     }
 }
 
