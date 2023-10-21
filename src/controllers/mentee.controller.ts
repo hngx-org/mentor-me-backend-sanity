@@ -23,6 +23,11 @@ class MenteeController {
         const result = await MenteeService.updateMenteeProfile({ ...req });
         res.status(200).send(response("Mentee profile updated", result));
     }
+
+    async getAMentee(req: Request, res: Response) {
+        const result = await MenteeService.getMentee({ ...req });
+        res.status(200).send(response("Mentee data fetched", result));
+    }
 }
 
 export default new MenteeController();

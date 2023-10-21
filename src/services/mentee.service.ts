@@ -147,6 +147,31 @@ class MenteeService {
 
         return { ...mentee, userDetails };
     }
+
+    async getMentee({ body, $currentUser }: Partial<Request>) {
+        const { error, value: data } = Joi.object({
+            body: Joi.object({
+                menteeId: Joi.string().trim().required().label("Mentee ID"),
+            }),
+            $currentUser: Joi.object({
+                _id: Joi.required(),
+            }),
+        })
+            .options({ stripUnknown: true })
+            .validate({ $currentUser, body });
+        if (error) throw new CustomError(error.message, 400);
+
+        const loggedUser = await MenteeModel.findOne({ userProfile: data.$currentUser._id });
+
+        // Check if user logged in exists
+        if (!loggedUser) throw new CustomError("user not found, please login", 404);
+
+        const mentee = await MenteeModel.findOne({ _id: data.body.menteeId });
+        if (!mentee) throw new CustomError("Mentee not found", 404);
+        const user = await UserModel.findOne({ _id: mentee?._id });
+
+        return { ...mentee, user };
+    }
 }
 
 export default new MenteeService();
