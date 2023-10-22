@@ -13,6 +13,6 @@ router.post("/create-profile", authGuard(CONFIGS.ROLES.USER), MenteeController.c
 
 router.patch("/update-profile", authGuard(CONFIGS.ROLES.USER), MenteeController.updateProfile);
 
-router.post("/get-mentee", authGuard(CONFIGS.ROLES.USER), MenteeController.getAMentee);
+router.post("/get-mentee", MenteeController.getAMentee);
 
 export default router;

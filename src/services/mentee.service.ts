@@ -138,7 +138,7 @@ class MenteeService {
         const user = await UserModel.findOne({ _id: data.$currentUser._id });
         if (!user) throw new CustomError("user not found", 404);
 
-        // Check if mentor exists
+        // Check if mentee exists
         const mentee = await MenteeModel.findOneAndUpdate({ userProfile: data.$currentUser._id }, { $set: { ...context, updatedAt: Date.now() } }, { new: true });
         if (!mentee) throw new CustomError("mentee profile not found", 404);
 
@@ -148,23 +148,15 @@ class MenteeService {
         return { ...mentee, userDetails };
     }
 
-    async getMentee({ body, $currentUser }: Partial<Request>) {
+    async getMentee({ body }: Partial<Request>) {
         const { error, value: data } = Joi.object({
             body: Joi.object({
                 menteeId: Joi.string().trim().required().label("Mentee ID"),
             }),
-            $currentUser: Joi.object({
-                _id: Joi.required(),
-            }),
         })
             .options({ stripUnknown: true })
-            .validate({ $currentUser, body });
+            .validate({ body });
         if (error) throw new CustomError(error.message, 400);
-
-        const loggedUser = await UserModel.findOne({ userProfile: data.$currentUser._id });
-
-        // Check if user logged in exists
-        if (!loggedUser) throw new CustomError("user not found, please login", 404);
 
         const mentee = await MenteeModel.findOne({ _id: data.body.menteeId });
         if (!mentee) throw new CustomError("Mentee not found", 404);
